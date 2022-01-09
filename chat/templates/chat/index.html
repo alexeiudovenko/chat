@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <title>Topics</title>
+    
+</head>
+<body>
+    <div style="margin: 20px;">
+        <header>
+            <div>
+                <p>Hello, {{ user }} <span><a href="{% url 'chat:logout' %}" class="btn btn-danger">Exit</a></span></p>
+            </div>
+        </header>
+
+        <div style="background-color: dimgray; width: 400px; padding: 20px; border-radius: 6px;">
+            <p>Create a topic</p>
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" class="btn btn-primary">
+            </form>
+        </div>
+
+        <p>What chat room would you like to enter?</p>
+        <div> 
+            {% for t in topics %}
+                <a href="{% url 'chat:room' t.id %}?name={{ t.topic_name }}" style="background-color: rosybrown; width: 200px; height: 50px; display: inline-block; margin: 20px; color: white; border-radius: 6px;">{{ t.topic_name }}</a>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
