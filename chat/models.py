@@ -19,12 +19,8 @@ class Message(models.Model):
     def __str__(self):
         return self.text
 
-class DelayedMessages(models.Model):
-    topic_message = models.ForeignKey(Topic, on_delete=models.CASCADE)
-    sender_name = models.CharField(max_length=50, verbose_name='Sender`s name')
-    text = models.TextField(verbose_name='Text')
-    date_time = models.DateTimeField(verbose_name='Date and time', default=datetime.now())
-    anonymous = models.BooleanField(verbose_name='Anon', default=False)
+class DelayedMessages(Message):
+    pass
 
     def __str__(self):
         return self.text
